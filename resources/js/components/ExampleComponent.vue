@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import Project from "./Project";
+    import Project from "./ProjectTest";
 
     export default {
         components: {Project},
