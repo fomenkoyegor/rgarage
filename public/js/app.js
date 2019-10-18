@@ -44318,32 +44318,15 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c(
-        "draggable",
-        {
-          staticClass: "col-12",
-          staticStyle: { margin: "0!important", padding: "0!important" },
-          attrs: { list: _vm.tasks },
-          on: {
-            start: function($event) {
-              _vm.dragging = true
-            },
-            end: function($event) {
-              _vm.dragging = false
-            }
-          }
-        },
-        _vm._l(_vm.tasks, function(task, index) {
-          return _c("Task", {
-            key: task.id,
-            attrs: { task: task, index: index },
-            on: { update: _vm.onUpdateTask, delete: _vm.onDeleteTask }
-          })
-        }),
-        1
-      )
+      _vm._l(_vm.tasks, function(task, index) {
+        return _c("Task", {
+          key: task.id,
+          attrs: { task: task, index: index },
+          on: { update: _vm.onUpdateTask, delete: _vm.onDeleteTask }
+        })
+      })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = [

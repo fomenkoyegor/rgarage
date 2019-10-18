@@ -51,30 +51,30 @@
             </div>
         </div>
 
-<!--        <Task v-for="(task,index) in tasks"-->
-<!--              :key="task.id"-->
-<!--              :task="task"-->
-<!--              :index="index"-->
-<!--              @update="onUpdateTask"-->
-<!--              @delete="onDeleteTask"-->
-<!--        />-->
+        <Task v-for="(task,index) in tasks"
+              :key="task.id"
+              :task="task"
+              :index="index"
+              @update="onUpdateTask"
+              @delete="onDeleteTask"
+        />
 
 
-            <draggable
-                :list="tasks"
-                class="col-12"
-                style="margin: 0!important;padding: 0!important;"
-                @start="dragging = true"
-                @end="dragging = false"
-            >
-                <Task v-for="(task,index) in tasks"
-                      :key="task.id"
-                      :task="task"
-                      :index="index"
-                      @update="onUpdateTask"
-                      @delete="onDeleteTask"
-                />
-            </draggable>
+<!--            <draggable-->
+<!--                :list="tasks"-->
+<!--                class="col-12"-->
+<!--                style="margin: 0!important;padding: 0!important;"-->
+<!--                @start="dragging = true"-->
+<!--                @end="dragging = false"-->
+<!--            >-->
+<!--                <Task v-for="(task,index) in tasks"-->
+<!--                      :key="task.id"-->
+<!--                      :task="task"-->
+<!--                      :index="index"-->
+<!--                      @update="onUpdateTask"-->
+<!--                      @delete="onDeleteTask"-->
+<!--                />-->
+<!--            </draggable>-->
 
 
 
