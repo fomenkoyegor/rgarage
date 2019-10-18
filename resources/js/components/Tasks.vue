@@ -51,29 +51,52 @@
             </div>
         </div>
 
-        <Task v-for="task in tasks"
-              :key="task.id"
-              :task="task"
-              @update="onUpdateTask"
-              @delete="onDeleteTask"
-        />
+<!--        <Task v-for="(task,index) in tasks"-->
+<!--              :key="task.id"-->
+<!--              :task="task"-->
+<!--              :index="index"-->
+<!--              @update="onUpdateTask"-->
+<!--              @delete="onDeleteTask"-->
+<!--        />-->
+
+
+            <draggable
+                :list="tasks"
+                class="col-12"
+                style="margin: 0!important;padding: 0!important;"
+                @start="dragging = true"
+                @end="dragging = false"
+            >
+                <Task v-for="(task,index) in tasks"
+                      :key="task.id"
+                      :task="task"
+                      :index="index"
+                      @update="onUpdateTask"
+                      @delete="onDeleteTask"
+                />
+            </draggable>
+
 
 
     </div>
 </template>
 
 <script>
+    import draggable from 'vuedraggable';
     import {required, maxLength, minLength} from 'vuelidate/lib/validators';
     import Task from "./Task";
 
     export default {
-        components: {Task},
+        components: {Task, draggable},
         props: ['project'],
         data: () => ({
             name: '',
             tasks: []
         }),
         methods: {
+            checkMove(){
+                window.console.log("Future index: " + e.draggedContext.futureIndex);
+            },
             onDeleteTask(task) {
                 this.tasks = this.tasks.filter(t => t.id !== task.id);
             },
@@ -135,6 +158,16 @@
 <style scoped lang="scss">
     .tasks .title {
         background-color: #6574cd;
+    }
+
+
+    *,body,html{
+        /*margin: 0;*/
+        /*padding: 0;*/
+        box-sizing: border-box;
+        col{
+            padding: 0;
+        }
     }
 
 

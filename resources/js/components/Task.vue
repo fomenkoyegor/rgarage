@@ -1,5 +1,5 @@
 <template>
-    <div class="col-12 task bg-white" :class="{'complite':task.status}">
+    <div class="col-12 task bg-white" :class="{'complite':task.status}" style="width: 100%">
         <div>
             <div class="title row  align-content-center">
                 <div class="col-1 row justify-content-center align-content-center">
@@ -13,7 +13,8 @@
                     <button class="del btn  btn-sm"
 
                     >
-                        {{task.priority}}
+<!--                        {{task.priority}}-->
+                        {{index+1}}
                     </button>
 
                     <button class="edit btn  btn-sm"
@@ -161,7 +162,8 @@
                 priority: Number,
                 date: Date,
                 created_at: Date
-            }
+            },
+            index:Number
         },
         methods: {
             save() {
@@ -228,7 +230,7 @@
     .task {
         border-bottom: 1px solid;
         padding: 0.4em;
-
+        width: 100%;
         &:last-of-type {
             border: none;
             padding-bottom: 1em;

@@ -59,52 +59,105 @@
         </div>
 
         <div class="bg-secondary">
-            <ul>
-                <li v-for="task in tasks" :key="task.id" :class="{'complite': task.status}">
-                    {{task.name}}
-                    <button @click="onDelTask(task)">del</button>
-                    <input type="number" @change="onUpdateTask(task)" v-model="task.priority" min="0">
-                    <input type="checkbox" v-model="task.status" @change="onUpdateTask(task)">
-                    <input type="date" v-model="task.date" @change="onUpdateTask(task)">
-                </li>
-            </ul>
+<!--            <ul>-->
+<!--                <li v-for="task in tasks" :key="task.id" :class="{'complite': task.status}">-->
+<!--                    {{task.name}}-->
+<!--                    <button @click="onDelTask(task)">del</button>-->
+<!--                    <input type="number" @change="onUpdateTask(task)" v-model="task.priority" min="0">-->
+<!--                    <input type="checkbox" v-model="task.status" @change="onUpdateTask(task)">-->
+<!--                    <input type="date" v-model="task.date" @change="onUpdateTask(task)">-->
+<!--                </li>-->
+<!--            </ul>-->
 
-            <!--            <draggable v-model="tasks"-->
-            <!--                       draggable=".item"-->
-            <!--                       @change="onMove"-->
-            <!--                       :sort="true"-->
-            <!--            >-->
-            <!--                <transition-group>-->
-            <!--                    <div class="item" v-for="task in tasks" :key="task.id" style="border:1px solid">-->
-            <!--                        {{task.name}} pr:{{task.priority}}-->
-            <!--                        <button @click="onDelTask(task)">del</button>-->
-            <!--                    </div>-->
-            <!--                </transition-group>-->
-            <!--            </draggable>-->
+<!--                        <draggable :list="tasks"-->
+<!--                                   draggable=".item"-->
+<!--                                   :move="onMove"-->
+<!--                                   :sort="true"-->
+<!--                                   @start="drag=true" @end="drag=false"-->
+<!--                        >-->
+<!--                            <transition-group>-->
+<!--                                <div class="item" v-for="(task,index) in tasks" :key="task.id" style="border:1px solid">-->
+<!--                                    {{task.name}} <br>-->
+<!--                                    id:{{index}}<br>-->
+<!--                                    pr:{{task.priority}}<br>-->
+<!--                                    <button @click="onDelTask(task)">del</button>-->
+<!--                                </div>-->
+<!--                            </transition-group>-->
+<!--                        </draggable>-->
+        </div>
+
+        <draggable
+            :list="tasks"
+            class="list-group"
+            ghost-class="ghost"
+            :move="checkMove"
+            @start="dragging = true"
+            @end="dragging = false"
+        >
+<!--            <div-->
+<!--                class="list-group-item"-->
+<!--                v-for="element in tasks"-->
+<!--                :key="element.name"-->
+<!--            >-->
+<!--                {{ element.name }}-->
+<!--            </div>-->
+
+            <ElemComponent  v-for="(element,index) in tasks"
+                            :key="element.name"
+                            :task="element"
+                            :index="index"
+            />
+        </draggable>
+
+
+        <div>
+            <pre>
+                {{tasks}}
+            </pre>
         </div>
 
     </div>
 </template>
 
 <script>
+    import ElemComponent from "./ElemComponent";
     import draggable from 'vuedraggable';
 
     export default {
         components: {
             draggable,
+            ElemComponent
         },
         name: "Project",
         props: ['project'],
+
         data: () => ({
             newName: '',
             isEdit: false,
             tasks: [],
-            newTaskName: ''
+            newTaskName: '',
+            list:[
+                {
+                    "name": "Jean",
+                    "id": 2
+                },
+                {
+                    "name": "Joao",
+                    "id": 1
+                },
+                {
+                    "name": "John",
+                    "id": 0
+                }
+            ]
         }),
         mounted() {
             this.onGetTasks()
         },
         methods: {
+            checkMove(e) {
+                window.console.log("Future index: " + e.draggedContext.futureIndex);
+            },
             onPriotrityTask(e, task) {
                 task.priority = e.target.value;
                 if(task.priority>0) this.onUpdateTask(task);
@@ -132,7 +185,8 @@
                         }
                     })
             },
-            onMove(v) {
+            onMove(v,originalEvent) {
+                console.log(v.moved,v)
                 // this.onUpdateTask({...v.moved.element, priority: v.moved.newIndex});
             },
             onDelTask(task) {

@@ -3,6 +3,7 @@
 @section('content')
     <div id="app">
         <task-manager></task-manager>
+{{--        <example-component></example-component>--}}
     </div>
     {{--<div class="container">--}}
     {{--    <div class="row justify-content-center">--}}
