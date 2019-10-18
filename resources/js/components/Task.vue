@@ -180,7 +180,7 @@
                 this.modalUpdateToggle();
             },
             modalUpdateToggle() {
-                $('#updateModal' + this.task.id).modal('toggle');
+                $('#updateModal' + this.task.id).modal('hide');
 
             },
             onDeleteTask() {

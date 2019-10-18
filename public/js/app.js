@@ -2760,7 +2760,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.modalUpdateToggle();
     },
     modalUpdateToggle: function modalUpdateToggle() {
-      $('#updateModal' + this.task.id).modal('toggle');
+      $('#updateModal' + this.task.id).modal('hide');
     },
     onDeleteTask: function onDeleteTask() {
       var _this = this;
